@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HospitalNewDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Symptoms" Type="nvarchar(max)" />
+          <Property Name="Diagnossis" Type="nvarchar(max)" />
+          <Property Name="Medicines" Type="nvarchar(max)" />
+          <Property Name="DoctorId" Type="int" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorName" Type="nvarchar(max)" />
+          <Property Name="DoctorExp" Type="int" Nullable="false" />
+          <Property Name="DoctorPassword" Type="int" Nullable="false" />
+          <Property Name="DiagnosesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PatientName" Type="nvarchar(max)" />
+          <Property Name="PatientAdresses" Type="nvarchar(max)" />
+          <Property Name="PatientPhone" Type="nvarchar(max)" />
+          <Property Name="PatientAge" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="BloodGroup" Type="int" Nullable="false" />
+          <Property Name="PatientDisease" Type="nvarchar(max)" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Diagnoses_Doctors_DoctorId">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagnoses">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Diagnoses_Id">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Doctors_DoctorId">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HospitalNewDBModelStoreContainer">
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Diagnoses_Doctors_DoctorId" Association="Self.FK_Diagnoses_Doctors_DoctorId">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Diagnoses_Id" Association="Self.FK_Patients_Diagnoses_Id">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Doctors_DoctorId" Association="Self.FK_Patients_Doctors_DoctorId">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HospitalNewDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HospitalNewDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Diagnoses" EntityType="HospitalNewDBModel.Diagnoses" />
+          <EntitySet Name="Doctors" EntityType="HospitalNewDBModel.Doctors" />
+          <EntitySet Name="Patients" EntityType="HospitalNewDBModel.Patients" />
+          <AssociationSet Name="FK_Diagnoses_Doctors_DoctorId" Association="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Diagnoses_Id" Association="HospitalNewDBModel.FK_Patients_Diagnoses_Id">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Doctors_DoctorId" Association="HospitalNewDBModel.FK_Patients_Doctors_DoctorId">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Symptoms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Diagnossis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Medicines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Int32" />
+          <NavigationProperty Name="Doctors" Relationship="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId" FromRole="Diagnoses" ToRole="Doctors" />
+          <NavigationProperty Name="Patients" Relationship="HospitalNewDBModel.FK_Patients_Diagnoses_Id" FromRole="Diagnoses" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorExp" Type="Int32" Nullable="false" />
+          <Property Name="DoctorPassword" Type="Int32" Nullable="false" />
+          <Property Name="DiagnosesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Diagnoses" Relationship="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId" FromRole="Doctors" ToRole="Diagnoses" />
+          <NavigationProperty Name="Patients" Relationship="HospitalNewDBModel.FK_Patients_Doctors_DoctorId" FromRole="Doctors" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PatientName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PatientAdresses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PatientPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PatientAge" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="BloodGroup" Type="Int32" Nullable="false" />
+          <Property Name="PatientDisease" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Diagnoses" Relationship="HospitalNewDBModel.FK_Patients_Diagnoses_Id" FromRole="Patients" ToRole="Diagnoses" />
+          <NavigationProperty Name="Doctors" Relationship="HospitalNewDBModel.FK_Patients_Doctors_DoctorId" FromRole="Patients" ToRole="Doctors" />
+        </EntityType>
+        <Association Name="FK_Diagnoses_Doctors_DoctorId">
+          <End Type="HospitalNewDBModel.Doctors" Role="Doctors" Multiplicity="0..1" />
+          <End Type="HospitalNewDBModel.Diagnoses" Role="Diagnoses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagnoses">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Diagnoses_Id">
+          <End Type="HospitalNewDBModel.Diagnoses" Role="Diagnoses" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HospitalNewDBModel.Patients" Role="Patients" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Patients_Doctors_DoctorId">
+          <End Type="HospitalNewDBModel.Doctors" Role="Doctors" Multiplicity="1" />
+          <End Type="HospitalNewDBModel.Patients" Role="Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HospitalNewDBModelStoreContainer" CdmEntityContainer="HospitalNewDBEntities">
+          <EntitySetMapping Name="Diagnoses">
+            <EntityTypeMapping TypeName="HospitalNewDBModel.Diagnoses">
+              <MappingFragment StoreEntitySet="Diagnoses">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Medicines" ColumnName="Medicines" />
+                <ScalarProperty Name="Diagnossis" ColumnName="Diagnossis" />
+                <ScalarProperty Name="Symptoms" ColumnName="Symptoms" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="HospitalNewDBModel.Doctors">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="DiagnosesId" ColumnName="DiagnosesId" />
+                <ScalarProperty Name="DoctorPassword" ColumnName="DoctorPassword" />
+                <ScalarProperty Name="DoctorExp" ColumnName="DoctorExp" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="HospitalNewDBModel.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="PatientDisease" ColumnName="PatientDisease" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PatientAge" ColumnName="PatientAge" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="PatientAdresses" ColumnName="PatientAdresses" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
