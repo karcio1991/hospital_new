@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HospitalNewDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HospitalNewDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Diagnoses">
           <Key>
             <PropertyRef Name="Id" />
@@ -94,27 +94,11 @@
             <End Role="Patients" EntitySet="Patients" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HospitalNewDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="HospitalNewDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Diagnoses" EntityType="HospitalNewDBModel.Diagnoses" />
-          <EntitySet Name="Doctors" EntityType="HospitalNewDBModel.Doctors" />
-          <EntitySet Name="Patients" EntityType="HospitalNewDBModel.Patients" />
-          <AssociationSet Name="FK_Diagnoses_Doctors_DoctorId" Association="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId">
-            <End Role="Doctors" EntitySet="Doctors" />
-            <End Role="Diagnoses" EntitySet="Diagnoses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patients_Diagnoses_Id" Association="HospitalNewDBModel.FK_Patients_Diagnoses_Id">
-            <End Role="Diagnoses" EntitySet="Diagnoses" />
-            <End Role="Patients" EntitySet="Patients" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patients_Doctors_DoctorId" Association="HospitalNewDBModel.FK_Patients_Doctors_DoctorId">
-            <End Role="Doctors" EntitySet="Doctors" />
-            <End Role="Patients" EntitySet="Patients" />
-          </AssociationSet>
-        </EntityContainer>
         <EntityType Name="Diagnoses">
           <Key>
             <PropertyRef Name="Id" />
@@ -124,8 +108,8 @@
           <Property Name="Diagnossis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Medicines" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DoctorId" Type="Int32" />
-          <NavigationProperty Name="Doctors" Relationship="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId" FromRole="Diagnoses" ToRole="Doctors" />
-          <NavigationProperty Name="Patients" Relationship="HospitalNewDBModel.FK_Patients_Diagnoses_Id" FromRole="Diagnoses" ToRole="Patients" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Diagnoses_Doctors_DoctorId" FromRole="Diagnoses" ToRole="Doctors" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patients_Diagnoses_Id" FromRole="Diagnoses" ToRole="Patients" />
         </EntityType>
         <EntityType Name="Doctors">
           <Key>
@@ -136,8 +120,8 @@
           <Property Name="DoctorExp" Type="Int32" Nullable="false" />
           <Property Name="DoctorPassword" Type="Int32" Nullable="false" />
           <Property Name="DiagnosesId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Diagnoses" Relationship="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId" FromRole="Doctors" ToRole="Diagnoses" />
-          <NavigationProperty Name="Patients" Relationship="HospitalNewDBModel.FK_Patients_Doctors_DoctorId" FromRole="Doctors" ToRole="Patients" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK_Diagnoses_Doctors_DoctorId" FromRole="Doctors" ToRole="Diagnoses" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Patients_Doctors_DoctorId" FromRole="Doctors" ToRole="Patients" />
         </EntityType>
         <EntityType Name="Patients">
           <Key>
@@ -152,12 +136,12 @@
           <Property Name="BloodGroup" Type="Int32" Nullable="false" />
           <Property Name="PatientDisease" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DoctorId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Diagnoses" Relationship="HospitalNewDBModel.FK_Patients_Diagnoses_Id" FromRole="Patients" ToRole="Diagnoses" />
-          <NavigationProperty Name="Doctors" Relationship="HospitalNewDBModel.FK_Patients_Doctors_DoctorId" FromRole="Patients" ToRole="Doctors" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK_Patients_Diagnoses_Id" FromRole="Patients" ToRole="Diagnoses" />
+          <NavigationProperty Name="Doctors" Relationship="Self.FK_Patients_Doctors_DoctorId" FromRole="Patients" ToRole="Doctors" />
         </EntityType>
         <Association Name="FK_Diagnoses_Doctors_DoctorId">
-          <End Type="HospitalNewDBModel.Doctors" Role="Doctors" Multiplicity="0..1" />
-          <End Type="HospitalNewDBModel.Diagnoses" Role="Diagnoses" Multiplicity="*" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="0..1" />
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Doctors">
               <PropertyRef Name="Id" />
@@ -168,10 +152,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Patients_Diagnoses_Id">
-          <End Type="HospitalNewDBModel.Diagnoses" Role="Diagnoses" Multiplicity="1">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="HospitalNewDBModel.Patients" Role="Patients" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Diagnoses">
               <PropertyRef Name="Id" />
@@ -182,8 +166,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Patients_Doctors_DoctorId">
-          <End Type="HospitalNewDBModel.Doctors" Role="Doctors" Multiplicity="1" />
-          <End Type="HospitalNewDBModel.Patients" Role="Patients" Multiplicity="*" />
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Doctors">
               <PropertyRef Name="Id" />
@@ -193,46 +177,63 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="HospitalNewDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" />
+          <AssociationSet Name="FK_Diagnoses_Doctors_DoctorId" Association="Self.FK_Diagnoses_Doctors_DoctorId">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Diagnoses_Id" Association="Self.FK_Patients_Diagnoses_Id">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Patients_Doctors_DoctorId" Association="Self.FK_Patients_Doctors_DoctorId">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HospitalNewDBModelStoreContainer" CdmEntityContainer="HospitalNewDBEntities">
+        <EntityContainerMapping StorageEntityContainer="HospitalNewDBModelStoreContainer" CdmEntityContainer="HospitalNewDBEntities2">
           <EntitySetMapping Name="Diagnoses">
             <EntityTypeMapping TypeName="HospitalNewDBModel.Diagnoses">
               <MappingFragment StoreEntitySet="Diagnoses">
-                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-                <ScalarProperty Name="Medicines" ColumnName="Medicines" />
-                <ScalarProperty Name="Diagnossis" ColumnName="Diagnossis" />
-                <ScalarProperty Name="Symptoms" ColumnName="Symptoms" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Symptoms" ColumnName="Symptoms" />
+                <ScalarProperty Name="Diagnossis" ColumnName="Diagnossis" />
+                <ScalarProperty Name="Medicines" ColumnName="Medicines" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Doctors">
             <EntityTypeMapping TypeName="HospitalNewDBModel.Doctors">
               <MappingFragment StoreEntitySet="Doctors">
-                <ScalarProperty Name="DiagnosesId" ColumnName="DiagnosesId" />
-                <ScalarProperty Name="DoctorPassword" ColumnName="DoctorPassword" />
-                <ScalarProperty Name="DoctorExp" ColumnName="DoctorExp" />
-                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorName" ColumnName="DoctorName" />
+                <ScalarProperty Name="DoctorExp" ColumnName="DoctorExp" />
+                <ScalarProperty Name="DoctorPassword" ColumnName="DoctorPassword" />
+                <ScalarProperty Name="DiagnosesId" ColumnName="DiagnosesId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="HospitalNewDBModel.Patients">
               <MappingFragment StoreEntitySet="Patients">
-                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
-                <ScalarProperty Name="PatientDisease" ColumnName="PatientDisease" />
-                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="PatientAge" ColumnName="PatientAge" />
-                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
-                <ScalarProperty Name="PatientAdresses" ColumnName="PatientAdresses" />
-                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PatientName" ColumnName="PatientName" />
+                <ScalarProperty Name="PatientAdresses" ColumnName="PatientAdresses" />
+                <ScalarProperty Name="PatientPhone" ColumnName="PatientPhone" />
+                <ScalarProperty Name="PatientAge" ColumnName="PatientAge" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="PatientDisease" ColumnName="PatientDisease" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

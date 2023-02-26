@@ -1,0 +1,52 @@
+﻿<Window x:Class="hospital_new.ChildDoctorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:hospital_new"
+        mc:Ignorable="d"
+        Title="ChildPatientWindow" Height="600" Width="500" Style="{StaticResource styleWindow}" WindowStartupLocation="CenterScreen">
+
+    <Border Style="{StaticResource styleBorder}">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+                <RowDefinition Height="75" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Content="DoctorName" Grid.Row="0" Grid.Column="0" Style="{StaticResource styleDoLabelow}" />
+            <TextBox x:Name="tbDoctorName" Style="{StaticResource styleTextBox}" Grid.Row="0" Grid.Column="1" />
+
+            <Label Content="DoctorExp" Grid.Row="1" Grid.Column="0" Style="{StaticResource styleDoLabelow}" />
+            <TextBox x:Name="tbDoctorExp" Style="{StaticResource styleTextBox}" Grid.Row="1" Grid.Column="1" />
+            <Label Content="DoctorPassword" Grid.Row="2" Grid.Column="0" Style="{StaticResource styleDoLabelow}" />
+            <TextBox x:Name="tbDoctorPassword" Style="{StaticResource styleTextBox}" Grid.Row="2" Grid.Column="1" />
+
+            <Label Content="PatientName" Grid.Row="3" Grid.Column="0" Style="{StaticResource styleDoLabelow}" />
+            <TextBox x:Name="tbPatientName" Grid.Row="3" Grid.Column="1" Style="{StaticResource styleTextBox}" />
+
+            <Label Content="DiagnosesId" Style="{StaticResource styleDoLabelow}" Grid.Row="4" Grid.Column="0" />
+            <TextBox x:Name="tbDiagnosesId" Style="{StaticResource styleTextBox}" Grid.Row="4" Grid.Column="1" />
+
+           
+
+
+            <Button x:Name="btnConfirm" Content="Confirm" Style="{StaticResource styleButtons}" Grid.Row="6" Grid.Column="0" Click="btnConfirm_Click"/>
+            <Button x:Name="btnReset" Content="Reset" Style="{StaticResource styleButtons}" Grid.Row="6" Grid.Column="1" />
+
+            <Button x:Name="btnExit" Content="Exit" Background="Red" FontSize="28" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Click="btnExit_Click"/>
+        </Grid>
+    </Border>
+</Window>

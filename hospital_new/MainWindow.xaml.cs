@@ -85,5 +85,21 @@ namespace hospital_new
             return doctors;
         }
 
+        private void tboxLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            
+            MenuWindow menuWindow = new MenuWindow();
+            menuWindow.Show();
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

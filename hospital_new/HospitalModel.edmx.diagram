@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="86e07fbe9aac4a9899d203c4ac11b980" Name="Diagram1">
-        <EntityTypeShape EntityType="HospitalNewDBModel.Diagnoses" Width="1.5" PointX="3" PointY="1.375" />
-        <EntityTypeShape EntityType="HospitalNewDBModel.Doctors" Width="1.5" PointX="0.75" PointY="1.375" />
-        <EntityTypeShape EntityType="HospitalNewDBModel.Patients" Width="1.5" PointX="5.25" PointY="1" />
-        <AssociationConnector Association="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId" />
-        <AssociationConnector Association="HospitalNewDBModel.FK_Patients_Diagnoses_Id" />
-        <AssociationConnector Association="HospitalNewDBModel.FK_Patients_Doctors_DoctorId" />
+      <Diagram DiagramId="b380da78c43b4c30a6b0e671ec86b5ff" Name="Diagram1">
+        <EntityTypeShape EntityType="HospitalNewDBModel.Diagnoses" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalNewDBModel.Doctors" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HospitalNewDBModel.Patients" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="HospitalNewDBModel.FK_Diagnoses_Doctors_DoctorId" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalNewDBModel.FK_Patients_Diagnoses_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="HospitalNewDBModel.FK_Patients_Doctors_DoctorId" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

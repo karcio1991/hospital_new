@@ -1,0 +1,192 @@
+﻿<Window x:Class="hospital_new.MenuWindow" Style="{StaticResource styleWindow}"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:hospital_new"
+   
+        Title="MenuWindow"  WindowStartupLocation="CenterScreen">
+    <Border Style="{StaticResource styleBorder}" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="144"/>
+                <RowDefinition Height="144"/>
+                <RowDefinition Height="144"/>
+                <RowDefinition Height="144"/>
+                <RowDefinition Height="144"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <!--left menu-->
+
+            <Border Visibility="Hidden" Name="borderDiagnose" BorderBrush="GhostWhite" BorderThickness="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+                <Grid Name="gridDiagnose">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="144" />
+                        <RowDefinition Height="144" />
+                        <RowDefinition Height="144" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="445" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid Name="dataGridDiagnose" Width="660" CellStyle="{DynamicResource styleEachCell}" Style="{StaticResource styleDataGrid}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Background" Value="LightGreen" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                        <Setter Property="FontWeight" Value="Bold"/>
+                                        
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            
+                            <DataGridTextColumn Header="Symptoms" Binding="{Binding Symptoms}"/>
+                            <DataGridTextColumn Header="Diagnoses" Binding="{Binding Diagnossis}"/>
+                            <DataGridTextColumn Header="Medicines" Binding="{Binding Medicines}"/>
+                            <DataGridTextColumn Header="PatientId" Binding="{Binding Patients.Id}"/>
+                            <DataGridTextColumn Header="PatientName" Binding="{Binding Patients.PatientName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Grid Name="gridSettings" Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="72"/>
+                            <RowDefinition Height="72"/>
+                            <RowDefinition Height="72"/>
+                            <RowDefinition Height="72"/>
+                            <RowDefinition Height="72"/>
+                            <RowDefinition Height="72"/>
+                        </Grid.RowDefinitions>
+                                         
+                        
+                    </Grid>
+                    
+                    
+                   
+                    
+                    
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="0" Grid.Column="0" >
+                <DockPanel>
+                    <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Right" Margin="30"
+                            HorizontalAlignment="Left">
+                        <Ellipse>
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/ambulance.png" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        
+                    </Border>
+                    
+                </DockPanel>
+            </Border>
+            
+            
+            <Border Visibility="Visible" Name="borderDoctor" BorderBrush="GhostWhite" BorderThickness="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+                <Grid Name="gridDoctor">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="144" />
+                        <RowDefinition Height="144" />
+                        <RowDefinition Height="144" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="445" />
+                        <ColumnDefinition Width="210" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid Name="dataGridDoctor" Width="660" Style="{StaticResource styleDataGrid}" Grid.Row="0" Grid.RowSpan="3"  CellStyle="{DynamicResource styleEachCell}" Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Background" Value="LightGreen" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                        <Setter Property="FontWeight" Value="Bold"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="DoctorName" Binding="{Binding DoctorName}"/>
+                            <DataGridTextColumn Header="DoctorExp" Binding="{Binding DoctorExp}"/>
+                            <DataGridTextColumn Header="DoctorPassword" Binding="{Binding DoctorPassword}"/>
+                            <DataGridTextColumn Header="DiagnosesId" Binding="{Binding DiagnosesId}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </Border>
+
+            <Border Visibility="Hidden" Name="borderPatient" BorderBrush="GhostWhite" BorderThickness="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" >
+                <Grid Name="gridPatient" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="144" />
+                        <RowDefinition Height="144" />
+                        <RowDefinition Height="144" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="455" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <DataGrid Name="dataGridPatient" CellStyle="{DynamicResource styleEachCell}" Width="660" Style="{StaticResource styleDataGrid}" Grid.Row="0" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="PatientName" Binding="{Binding PatientName}"/>
+                            <DataGridTextColumn Header="PatientAdresses" Binding="{Binding PatientAdresses}"/>
+                            <DataGridTextColumn Header="PatientPhone" Binding="{Binding PatientPhone}"/>
+                            <DataGridTextColumn Header="PatientAge" Binding="{Binding PatientAge}"/>
+                            <DataGridTextColumn Header="Gender" Binding="{Binding Gender}"/>
+                            <DataGridTextColumn Header="BloodGroup" Binding="{Binding BloodGroup}"/>
+                            <DataGridTextColumn Header="PatientDisease" Binding="{Binding PatientDisease}"/>
+                        </DataGrid.Columns>
+                    </DataGrid> 
+                    
+                    <Button Name="btnAddPatient" Style="{StaticResource styleButtons}" Grid.Row="2" Grid.Column="0"  Content="Add"/>
+
+                </Grid>
+            </Border>
+
+            <Grid Name="gridButtons" Grid.Row="4" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/> 
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="220" />
+                    <ColumnDefinition Width="220" />
+                    <ColumnDefinition Width="220" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button Name="btnAddGeneral" Style="{StaticResource styleButtons}" Grid.Row="0" Grid.Column="0"  Content="Add" Click="btnAddGeneral_Click"/>
+                <Button Name="btnDeleteDiagnose" Style="{StaticResource styleButtons}" Grid.Row="0" Grid.Column="1"  Content="Delete"/>
+                <Button Name="btnUpdateDiagnose" Style="{StaticResource styleButtons}" Grid.Row="0" Grid.Column="2"  Content="Update"/>
+                
+            </Grid>
+
+
+            <Button Name="btnDiagnose" Style="{StaticResource styleButtons}" Content="Diagnoses" Grid.Row="1" Grid.Column="0" Click="btnDiagnose_Click"  />
+            <Button Name="btnDoctor" Style="{StaticResource styleButtons}" Content="Doctors" Grid.Row="2" Grid.Column="0" Click="btnDoctor_Click"/>
+            <Button Name="btnPatient" Style="{StaticResource styleButtons}" Content="Patients" Grid.Row="3" Grid.Column="0" Click="btnPatient_Click"/>
+            <Button x:Name="btnExit" Content="Exit" Background="Red" FontSize="28" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Click="btnExit_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        </Grid>
+    </Border>
+
+</Window>

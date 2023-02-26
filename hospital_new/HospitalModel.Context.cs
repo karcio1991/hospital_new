@@ -13,10 +13,10 @@ namespace hospital_new
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HospitalNewDBEntities : DbContext
+    public partial class HospitalNewDBEntities2 : DbContext
     {
-        public HospitalNewDBEntities()
-            : base("name=HospitalNewDBEntities")
+        public HospitalNewDBEntities2()
+            : base("name=HospitalNewDBEntities2")
         {
         }
     

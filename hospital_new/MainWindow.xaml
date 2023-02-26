@@ -5,10 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:hospital_new"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="600" Width="600">
-    <Border Background="LightGreen" CornerRadius="50"  >
+        Title="LoginWindow" Height="600" Width="600" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent" > 
+    <Border Style="{StaticResource styleBorder}"  >
         <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="75"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300" />
+            </Grid.ColumnDefinitions>
 
+            <TextBlock x:Name="tbLogin" Style="{StaticResource styleTextBlock}" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Text="Login" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <TextBox Name="tboxLogin" Style="{StaticResource styleTextBox}" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Text="UserName" HorizontalAlignment="Center" Width="300" VerticalAlignment="Bottom" BorderThickness="6" BorderBrush="Green"/>
+            <TextBlock x:Name="tbPassword" Style="{StaticResource styleTextBlock}" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0" Text="Password" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <PasswordBox Name="pbPassword" Style="{StaticResource stylePasswordBox}" Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0" />
+            <Button Name="btnConfirm" Style="{StaticResource styleButtons}" Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="0" Content="Confirm" Click="btnConfirm_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300"/>
+            <Button Name="btnCreateAccount" Style="{StaticResource styleButtons}" Grid.Row="6" Grid.ColumnSpan="2" Grid.Column="0" Content="Create Account" VerticalAlignment="Center" HorizontalAlignment="Center" Width="300"/>
+            <Button x:Name="btnExit" Content="Exit" Background="Red" FontSize="28" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Click="btnExit_Click" HorizontalAlignment="Right" VerticalAlignment="Top"/>
         </Grid>
     </Border>
 

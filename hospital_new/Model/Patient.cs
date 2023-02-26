@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace hospital_new.Model
 {
 
-    public enum Gender { Male, Female };
-    public enum BloodGroup { APlus, OPlus, BPlus, ABPlus, AMinus, OMinus, BMinus, ABMinus };
+    public enum Gender { Male = 0, Female };
+    public enum BloodGroup { APlus = 0, OPlus, BPlus, ABPlus, AMinus, OMinus, BMinus, ABMinus };
 
 
     public class Patient
